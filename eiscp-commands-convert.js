@@ -1,11 +1,10 @@
-/*jslint node:true nomen:true*/
 'use strict';
 /*
     Script that converts eiscp-commands.yaml to eiscp-commands.json
 */
-require('js-yaml');
+const yaml = require('js-yaml');
 
-var fs = require('fs'),
+let fs = require('fs'),
     command_mappings = {},
     value_mappings = {},
     command,
@@ -18,8 +17,7 @@ var fs = require('fs'),
     result = { 'commands': {} };
 
 try {
-
-    doc = require('./eiscp-commands.yaml');
+    const doc = yaml.safeLoad(fs.readFileSync('./eiscp-commands.yaml', 'utf8'));
     result.modelsets = doc.modelsets;
     delete doc.modelsets;
 
